@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class PlayerControls : MonoBehaviour
     private float movementX;
     private float movementY;
     public float speed = 0;
+    public TextMeshProUGUI countText;
+    private int count;
 
 
 
@@ -14,8 +17,9 @@ public class PlayerControls : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+        count = 0;
 
-
+        SetCountText();
     }
 
     void OnMove(InputValue movementValue)
@@ -26,6 +30,11 @@ public class PlayerControls : MonoBehaviour
         movementY = movementVector.y;
     }
 
+    void SetCountText()
+    {
+        countText.text = "Count: " + count.ToString();
+    }
+
     private void FixedUpdate()
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
@@ -34,6 +43,14 @@ public class PlayerControls : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        other.gameObject.SetActive(false);
+        if (other.gameObject.CompareTag("PickUps"))
+        {
+            
+            other.gameObject.SetActive(false);
+            count += 1;
+            SetCountText();
+        }
+
+        
     }
 }
