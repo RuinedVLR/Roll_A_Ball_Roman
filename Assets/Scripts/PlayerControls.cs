@@ -45,8 +45,8 @@ public class PlayerControls : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PickUps"))
         {
-            
-            other.gameObject.SetActive(false);
+
+            Destroy(other.gameObject);
             count += 1;
             SetCountText();
         }
