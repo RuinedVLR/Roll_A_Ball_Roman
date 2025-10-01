@@ -1,5 +1,3 @@
-using Unity.Hierarchy;
-using UnityEditor.AnimatedValues;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour

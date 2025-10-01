@@ -1,10 +1,8 @@
-using NUnit.Framework;
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 
 
-public class Randomizer : MonoBehaviour
+public class SpawnRandomizer : MonoBehaviour
 {
     public int countExists;     //how many pickups exist
     public GameObject objectToSpawn;    //pickup prefab
