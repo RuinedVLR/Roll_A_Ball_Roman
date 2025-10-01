@@ -10,6 +10,11 @@ public class PlayerControls : MonoBehaviour
     public float speed = 0;
     public TextMeshProUGUI countText;
     private int count;
+    public TextMeshProUGUI xpText;
+    public TextMeshProUGUI lvlText;
+    private int lvl;
+    private int xp;
+    public static bool isLVLup = false;
 
 
 
@@ -18,6 +23,9 @@ public class PlayerControls : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         count = 0;
+
+        lvl = 1;
+        xp = 0;
 
         SetCountText();
     }
@@ -35,6 +43,18 @@ public class PlayerControls : MonoBehaviour
         countText.text = "Score: " + count.ToString();
     }
 
+    private void Update()
+    {
+        if (xp >= 50)
+        {
+            lvl++;
+            xp = 0;
+            isLVLup = true;
+        }
+        xpText.text = "XP: " + xp.ToString();
+        lvlText.text = "LVL: " + lvl.ToString();
+    }
+
     private void FixedUpdate()
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
@@ -48,6 +68,7 @@ public class PlayerControls : MonoBehaviour
 
             Destroy(other.gameObject);
             count += 1;
+            xp += 10;
             SetCountText();
         }
 
