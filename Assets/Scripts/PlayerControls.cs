@@ -9,6 +9,7 @@ public class PlayerControls : MonoBehaviour
     private float movementY;
     public float speed = 0;
     public TextMeshProUGUI countText;
+    public GameObject loseTextObject;
     private int count;
     public TextMeshProUGUI xpText;
     public TextMeshProUGUI lvlText;
@@ -28,6 +29,8 @@ public class PlayerControls : MonoBehaviour
         xp = 0;
 
         SetCountText();
+
+        loseTextObject.SetActive(false);
     }
 
     void OnMove(InputValue movementValue)
@@ -53,6 +56,8 @@ public class PlayerControls : MonoBehaviour
         }
         xpText.text = "XP: " + xp.ToString();
         lvlText.text = "LVL: " + lvl.ToString();
+
+
     }
 
     private void FixedUpdate()
@@ -80,6 +85,7 @@ public class PlayerControls : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
+            loseTextObject.SetActive(true);
         }
 
     }
