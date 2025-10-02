@@ -1040,6 +1040,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lvlUpMenuUI: {fileID: 9157143}
+  option1Text: {fileID: 1717352804}
+  option2Text: {fileID: 1095222026}
+  option3Text: {fileID: 1142800605}
+  magnet: {fileID: 0}
+  speedBoost: {fileID: 0}
+  fireRate: {fileID: 0}
+  firePower: {fileID: 0}
 --- !u!1 &470116287
 GameObject:
   m_ObjectHideFlags: 0
