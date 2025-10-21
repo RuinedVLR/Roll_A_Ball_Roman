@@ -2009,7 +2009,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721243254}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9791cb2476f96d64ebb574bb5ffd514f, type: 3}
   m_Name: 
@@ -2061,13 +2061,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 844558987}
+  - component: {fileID: 844558988}
   m_Layer: 0
   m_Name: PickUp Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &844558987
 Transform:
   m_ObjectHideFlags: 0
@@ -2083,6 +2084,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 572268726}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &844558988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844558986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1229235e0699a91409bcc4290c742483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countExists: 0
+  objectToSpawn: {fileID: 9048283315642354685, guid: b3b34c719e6f1ce43b203d38143a7b78, type: 3}
+  parentTransform: {fileID: 844558987}
+  spawnDelay: 1
+  timer: 0
+  maxObjects: 40
+  spawnedObj: []
 --- !u!1 &863803250
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,13 +2298,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899736862}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 34.28, z: -13.6}
+  m_LocalRotation: {x: 0.60876125, y: -0, z: -0, w: 0.7933535}
+  m_LocalPosition: {x: 0, y: 57, z: -13.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 75, y: 0, z: 0}
 --- !u!114 &899736866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4603,10 +4623,9 @@ MonoBehaviour:
   countExists: 0
   objectToSpawn: {fileID: 696996191}
   parentTransform: {fileID: 2144719529}
-  spawnRangeMin: {x: -70, y: 0.5, z: -70}
-  spawnRangeMax: {x: 70, y: 0.5, z: 70}
   spawnDelay: 2
   timer: 0
+  maxObjects: 40
   spawnedObj: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

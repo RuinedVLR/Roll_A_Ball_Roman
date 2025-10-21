@@ -7,12 +7,12 @@ public class SpawnRandomizer : MonoBehaviour
     public int countExists;     //how many pickups exist
     public GameObject objectToSpawn;    //pickup prefab
     public Transform parentTransform;   //parent object
-    public Vector3 spawnRangeMin = new Vector3(-70f, 0.5f, -70f);
-    public Vector3 spawnRangeMax = new Vector3(70f, 0.5f, 70f);
+    private Vector3 spawnRangeMin = new Vector3(-70f, 0.5f, -70f);
+    private Vector3 spawnRangeMax = new Vector3(70f, 0.5f, 70f);
 
-    public float spawnDelay = 2f;
+    public float spawnDelay = 1f;
     public float timer = 0f;
-    private int maxObjects = 40;
+    public int maxObjects = 40;
     public List<GameObject> spawnedObj = new List<GameObject>();   
     
 
