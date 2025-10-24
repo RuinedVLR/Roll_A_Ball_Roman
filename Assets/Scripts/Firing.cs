@@ -8,6 +8,8 @@ public class Firing : MonoBehaviour
     public float bulletSpeed = 10f;
     public float timer = 0f;
     public float delayTime = 1f;
+    public float radius = 5f;
+
 
     void Update()
     {
@@ -15,42 +17,38 @@ public class Firing : MonoBehaviour
 
         if (timer >= delayTime)
         {
-            Vector3 spawnPosition1 = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z);
-            Vector3 spawnPosition2 = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z + 4);
-            Vector3 spawnPosition3 = new Vector3(transform.position.x, transform.position.y, transform.position.z + 4);
-            Vector3 spawnPosition4 = new Vector3(transform.position.x - 4, transform.position.y, transform.position.z + 4);
-            Vector3 spawnPosition5 = new Vector3(transform.position.x - 4, transform.position.y, transform.position.z);
-            Vector3 spawnPosition6 = new Vector3(transform.position.x - 4, transform.position.y, transform.position.z - 4);
-            Vector3 spawnPosition7 = new Vector3(transform.position.x, transform.position.y, transform.position.z - 4);
-            Vector3 spawnPosition8 = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z - 4);
-            Quaternion bulletRotation1 = Quaternion.identity;
-            Quaternion bulletRotation2 = Quaternion.identity;
-            Quaternion bulletRotation3 = Quaternion.identity;
-            Quaternion bulletRotation4 = Quaternion.identity;
-            Quaternion bulletRotation5 = Quaternion.identity;
-            Quaternion bulletRotation6 = Quaternion.identity;
-            Quaternion bulletRotation7 = Quaternion.identity;
-            Quaternion bulletRotation8 = Quaternion.identity;
+            Vector3 center = transform.position;
 
-            GameObject newBullet1 = Instantiate(bullet, spawnPosition1, bulletRotation1);
-            GameObject newBullet2 = Instantiate(bullet, spawnPosition2, bulletRotation2);
-            GameObject newBullet3 = Instantiate(bullet, spawnPosition3, bulletRotation3);
-            GameObject newBullet4 = Instantiate(bullet, spawnPosition4, bulletRotation4);
-            GameObject newBullet5 = Instantiate(bullet, spawnPosition5, bulletRotation5);
-            GameObject newBullet6 = Instantiate(bullet, spawnPosition6, bulletRotation6);
-            GameObject newBullet7 = Instantiate(bullet, spawnPosition7, bulletRotation7);
-            GameObject newBullet8 = Instantiate(bullet, spawnPosition8, bulletRotation8);
-
-            newBullet1.transform.parent = null;
-
-            Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            if (rb != null)
+            Vector3[] offsets = new Vector3[]
             {
-                rb.linearVelocity = Vector3.forward * bulletSpeed;
+            new Vector3(1, 0, 0),
+            new Vector3(1, 0, 1),
+            new Vector3(0, 0, 1),
+            new Vector3(-1, 0, 1),
+            new Vector3(-1, 0, 0),
+            new Vector3(-1, 0, -1),
+            new Vector3(0, 0, -1),
+            new Vector3(1, 0, -1)
+            };
+
+            foreach (Vector3 offset in offsets)
+            {
+                Vector3 spawnPos = center + offset.normalized * radius;
+                Vector3 direction = (spawnPos - center).normalized;
+                Quaternion rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 90, 0);
+
+                GameObject newBullet = Instantiate(bullet, spawnPos, rotation);
+                newBullet.transform.parent = null;
+
+                BulletMover mover = newBullet.GetComponent<BulletMover>();
+                if (mover != null)
+                {
+                    mover.Initialize(direction, bulletSpeed, 5f);
+                }
             }
 
             timer = 0f;
-
         }
     }
+
 }
