@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class BulletMover : MonoBehaviour
@@ -6,6 +7,7 @@ public class BulletMover : MonoBehaviour
     private float speed;
     private float lifetime;
     private float timer;
+    public float damage = 10f;
 
     public void Initialize(Vector3 direction, float bulletSpeed, float duration)
     {
@@ -25,5 +27,15 @@ public class BulletMover : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Enemy hit");
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
 
 }
