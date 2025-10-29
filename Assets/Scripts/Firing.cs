@@ -5,14 +5,20 @@ public class Firing : MonoBehaviour
 {
     public GameObject bullet;
     public Transform parentObject;
-    public float bulletSpeed = 10f;
+    public float bulletSpeed = 50f;
     public float timer = 0f;
-    public float delayTime = 1f;
-    public float radius = 5f;
+    public float delayTime = 2f;
+    public float radius = 3f;
 
 
     void Update()
     {
+        delayTime = 2 - (0.2f * LVLupMenu.fireRateLvl);
+        if (delayTime <= 0f)
+        {
+            delayTime = 0.1f;
+        }
+        
         timer += Time.deltaTime;
 
         if (timer >= delayTime)

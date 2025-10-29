@@ -30,12 +30,13 @@ public class BulletMover : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Enemy hit");
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.TryGetComponent<EnemyScript>(out EnemyScript enemyComponent))
         {
-            Destroy(collision.gameObject);
+            Debug.Log("Enemy hit");
+            enemyComponent.Die();
         }
+
+        Debug.Log("Wall hit");
+        Destroy(gameObject);
     }
-
-
 }

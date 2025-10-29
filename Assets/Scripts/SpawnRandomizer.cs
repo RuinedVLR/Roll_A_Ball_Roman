@@ -10,9 +10,10 @@ public class SpawnRandomizer : MonoBehaviour
     private Vector3 spawnRangeMin = new Vector3(-70f, 0.5f, -70f);
     private Vector3 spawnRangeMax = new Vector3(70f, 0.5f, 70f);
 
-    public float spawnDelay = 1f;
+    public float spawnDelay = 2f;
+    public float scaleTimer;
     public float timer = 0f;
-    public int maxObjects = 40;
+    public int maxObjects = 100;
     public List<GameObject> spawnedObj = new List<GameObject>();   
     
 
@@ -24,10 +25,18 @@ public class SpawnRandomizer : MonoBehaviour
         countExists = spawnedObj.Count;
 
         spawnedObj.RemoveAll(item => item == null);
-        
+
+        scaleTimer += Time.deltaTime;        
         
         if (countExists < maxObjects)       //do not spawn more than 40
         {
+            spawnDelay -= 0.00001f * scaleTimer;
+
+            if (spawnDelay <= 0.1f)
+            {
+                spawnDelay = 0.1f;
+            }
+            
             timer += Time.deltaTime;
 
             if (timer >= spawnDelay)            //Spawn a pickup randomly in a defined range with a delay

@@ -24,6 +24,11 @@ public class LVLupMenu : MonoBehaviour
     public string[] imageNames = { "Option1IMG", "Option2IMG", "Option3IMG", "Option4IMG" };
     private Sprite[] loadedSprites;
 
+    public static int magnetLvl;
+    public static int speedLvl;
+    public static int fireRateLvl;
+    public static int firePowerLvl;
+
 
     private void Start()
     {
@@ -87,6 +92,23 @@ public class LVLupMenu : MonoBehaviour
         lvlUpMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isChoosingOption = false;
+
+        if (optionNames[option1Randomizer] == "Magnet")
+        {
+            magnetLvl++;
+        }
+        else if (optionNames[option1Randomizer] == "Speed Boost")
+        {
+            speedLvl++;
+        }
+        else if (optionNames[option1Randomizer] == "Fire Rate")
+        {
+            fireRateLvl++;
+        }
+        else if (optionNames[option1Randomizer] == "Fire Power")
+        {
+            firePowerLvl++;
+        }
     }
 
     public void Option2()
@@ -94,6 +116,23 @@ public class LVLupMenu : MonoBehaviour
         lvlUpMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isChoosingOption = false;
+
+        if (optionNames[option2Randomizer] == "Magnet")
+        {
+            magnetLvl++;
+        }
+        else if (optionNames[option2Randomizer] == "Speed Boost")
+        {
+            speedLvl++;
+        }
+        else if (optionNames[option2Randomizer] == "Fire Rate")
+        {
+            fireRateLvl++;
+        }
+        else if (optionNames[option2Randomizer] == "Fire Power")
+        {
+            firePowerLvl++;
+        }
     }
 
     public void Option3()
@@ -101,5 +140,22 @@ public class LVLupMenu : MonoBehaviour
         lvlUpMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isChoosingOption = false;
+
+        if (optionNames[option3Randomizer] == "Magnet")
+        {
+            magnetLvl++;
+        }
+        else if (optionNames[option3Randomizer] == "Speed Boost")
+        {
+            speedLvl++;
+        }
+        else if (optionNames[option3Randomizer] == "Fire Rate")
+        {
+            fireRateLvl++;
+        }
+        else if (optionNames[option3Randomizer] == "Fire Power")
+        {
+            firePowerLvl++;
+        }
     }
 }

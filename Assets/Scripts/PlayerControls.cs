@@ -7,7 +7,7 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody rb;
     private float movementX;
     private float movementY;
-    public float speed = 0;
+    public static float speed = 7;
     public TextMeshProUGUI countText;
     public GameObject loseTextObject;
     private int count;
@@ -48,6 +48,14 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
+        if (Collector.isCollected)
+        {
+            count += 1;
+            xp += 10;
+            SetCountText();
+            Collector.isCollected = false;
+        }
+
         if (xp >= 50)
         {
             lvl++;
@@ -57,27 +65,13 @@ public class PlayerControls : MonoBehaviour
         xpText.text = "XP: " + xp.ToString();
         lvlText.text = "LVL: " + lvl.ToString();
 
-
+        speed = 7 + LVLupMenu.speedLvl;
     }
 
     private void FixedUpdate()
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
         rb.AddForce(movement * speed);
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("PickUps"))
-        {
-
-            Destroy(other.gameObject);
-            count += 1;
-            xp += 10;
-            SetCountText();
-        }
-
-        
     }
 
     private void OnCollisionEnter(Collision collision)

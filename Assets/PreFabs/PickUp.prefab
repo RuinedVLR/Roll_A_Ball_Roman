@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2063872210789158976}
   - component: {fileID: 3230709332624630687}
   - component: {fileID: -6417815046422684032}
+  - component: {fileID: -7440412755074608825}
   m_Layer: 0
   m_Name: PickUp
   m_TagString: PickUps
@@ -145,7 +146,20 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7440412755074608825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048283315642354685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d509508a3b1cc4e48a07ddf2c022d422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
