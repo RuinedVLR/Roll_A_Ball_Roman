@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerControls : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerControls : MonoBehaviour
     public static float speed = 7;
     public TextMeshProUGUI countText;
     public GameObject loseTextObject;
+    public static bool isDead;
     private int count;
     public TextMeshProUGUI xpText;
     public TextMeshProUGUI lvlText;
@@ -21,6 +23,8 @@ public class PlayerControls : MonoBehaviour
 
     void Start()
     {
+        isDead = false;
+
         rb = GetComponent<Rigidbody>();
 
         count = 0;
@@ -78,10 +82,10 @@ public class PlayerControls : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
+            isDead = true;
+            gameObject.SetActive(false);
             loseTextObject.SetActive(true);
         }
-
     }
 
 }
