@@ -9,8 +9,8 @@ public class SpawnRandomizer : MonoBehaviour
     public Transform parentTransform;   //parent object
     public Transform playerTransform;   //player object
 
-    private Vector3 spawnRangeMin = new Vector3(-70f, 0.5f, -70f);
-    private Vector3 spawnRangeMax = new Vector3(70f, 0.5f, 70f);
+    private Vector3 spawnRangeMin = new Vector3(-145f, 0.5f, -70f);
+    private Vector3 spawnRangeMax = new Vector3(145f, 0.5f, 70f);
 
     public float spawnDelay = 4f;
     public float scaleTimer;
@@ -24,7 +24,6 @@ public class SpawnRandomizer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         countExists = spawnedObj.Count;
         spawnedObj.RemoveAll(item => item == null);
         scaleTimer += Time.deltaTime;        

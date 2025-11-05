@@ -5,11 +5,13 @@ public class MainMenu : MonoBehaviour
 {
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Level");
         LVLupMenu.magnetLvl = 0;
         LVLupMenu.speedLvl = 0;
         LVLupMenu.fireRateLvl = 0;
         LVLupMenu.firePowerLvl = 0;
+        PauseMenu.isPaused = false;
+        Time.timeScale = 1f;
     }
 
     public void PlayGame()
@@ -19,6 +21,11 @@ public class MainMenu : MonoBehaviour
         LVLupMenu.speedLvl = 0;
         LVLupMenu.fireRateLvl = 0;
         LVLupMenu.firePowerLvl = 0;
+    }
+
+    public void LoadShop()
+    {
+        SceneManager.LoadScene("Shop");
     }
 
     public void QuitGame()
