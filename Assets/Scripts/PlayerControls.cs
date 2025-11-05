@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerControls : MonoBehaviour
@@ -8,15 +7,20 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody rb;
     private float movementX;
     private float movementY;
-    public static float speed = 7;
+    public static float speed = 50;
     public TextMeshProUGUI countText;
     public GameObject loseTextObject;
     public static bool isDead;
-    private int count;
+    public bool hasDied = false;
+    public TextMeshProUGUI survivedTimeText;
+    public TextMeshProUGUI timeText;
+    private float timer;
+    private string finalSurvivedTime;
     public TextMeshProUGUI xpText;
     public TextMeshProUGUI lvlText;
     private int lvl;
     private int xp;
+    private int xpNeeded;
     public static bool isLVLup = false;
 
 
@@ -27,12 +31,10 @@ public class PlayerControls : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
 
-        count = 0;
+        timer = 0;
 
         lvl = 1;
         xp = 0;
-
-        SetCountText();
 
         loseTextObject.SetActive(false);
     }
@@ -45,28 +47,37 @@ public class PlayerControls : MonoBehaviour
         movementY = movementVector.y;
     }
 
-    void SetCountText()
-    {
-        countText.text = "Score: " + count.ToString();
-    }
-
     private void Update()
     {
+        if (!isDead)
+        {
+            timer += Time.deltaTime;
+            int minutes = Mathf.FloorToInt(timer / 60);
+            int seconds = Mathf.FloorToInt(timer % 60);
+            finalSurvivedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
+            timeText.text = finalSurvivedTime;
+        }
+        else if (!hasDied)
+        {
+            hasDied = true;
+        }
+
+        xpNeeded = 45 + (5 * lvl);
+
         if (Collector.isCollected)
         {
-            count += 1;
-            xp += 10;
-            SetCountText();
+            xp += 25;
             Collector.isCollected = false;
         }
 
-        if (xp >= 50)
+        if (xp >= xpNeeded)
         {
+            int leftOverXp = xp - xpNeeded;
             lvl++;
-            xp = 0;
+            xp = 0 + leftOverXp;
             isLVLup = true;
         }
-        xpText.text = "XP: " + xp.ToString();
+        xpText.text = "XP: " + xp.ToString() + "/" + xpNeeded.ToString();
         lvlText.text = "LVL: " + lvl.ToString();
 
         speed = 7 + LVLupMenu.speedLvl;
@@ -83,7 +94,13 @@ public class PlayerControls : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy"))
         {
             isDead = true;
+
+            survivedTimeText.text = "You survived for: " + finalSurvivedTime;
+
             gameObject.SetActive(false);
+            timeText.gameObject.SetActive(false);
+            xpText.gameObject.SetActive(false);
+            lvlText.gameObject.SetActive(false);
             loseTextObject.SetActive(true);
         }
     }

@@ -4,16 +4,19 @@ using System.Collections.Generic;
 
 public class SpawnRandomizer : MonoBehaviour
 {
-    public int countExists;     //how many pickups exist
-    public GameObject objectToSpawn;    //pickup prefab
+    public int countExists;     //how many enemies exist
+    public GameObject objectToSpawn;    //enemy prefab
     public Transform parentTransform;   //parent object
+    public Transform playerTransform;   //player object
+
     private Vector3 spawnRangeMin = new Vector3(-70f, 0.5f, -70f);
     private Vector3 spawnRangeMax = new Vector3(70f, 0.5f, 70f);
 
-    public float spawnDelay = 2f;
+    public float spawnDelay = 4f;
     public float scaleTimer;
-    public float timer = 0f;
-    public int maxObjects = 100;
+
+    private float timer = 0f;
+    private int maxObjects = 200;
     public List<GameObject> spawnedObj = new List<GameObject>();   
     
 
@@ -23,14 +26,17 @@ public class SpawnRandomizer : MonoBehaviour
     {
 
         countExists = spawnedObj.Count;
-
         spawnedObj.RemoveAll(item => item == null);
-
         scaleTimer += Time.deltaTime;        
         
-        if (countExists < maxObjects)       //do not spawn more than 40
+        if (countExists < maxObjects)       //do not spawn more than 200
         {
-            spawnDelay -= 0.00001f * scaleTimer;
+            if(scaleTimer >= 7.5f)      //every 10 seconds decrease spawn delay
+            {
+                scaleTimer = 0f;
+                spawnDelay -= 0.25f;
+            }
+            
 
             if (spawnDelay <= 0.1f)
             {
@@ -39,16 +45,25 @@ public class SpawnRandomizer : MonoBehaviour
             
             timer += Time.deltaTime;
 
-            if (timer >= spawnDelay)            //Spawn a pickup randomly in a defined range with a delay
+            if (timer >= spawnDelay)            //Spawn an enemy randomly in a defined range with a delay
             {
-                Vector3 spawnPosition = new Vector3(            // Generate a random number from -70 to 70 (represents coordinates)
+                Vector3 spawnPosition;
+                int attempts = 0;
+                do
+                {
+                    spawnPosition = new Vector3(            // Generate a random number from -70 to 70 (represents coordinates)
                     UnityEngine.Random.Range(spawnRangeMin.x, spawnRangeMax.x),
                     UnityEngine.Random.Range(spawnRangeMin.y, spawnRangeMax.y),
                     UnityEngine.Random.Range(spawnRangeMin.z, spawnRangeMax.z)
                     );
-                
-                GameObject newObj = Instantiate(objectToSpawn, spawnPosition, Quaternion.identity, parentTransform);
 
+                    attempts++;
+                }
+                while((Mathf.Abs(spawnPosition.x - playerTransform.position.x) < 15f &&
+                       Mathf.Abs(spawnPosition.z - playerTransform.position.z) < 15f) && attempts < 10); // Ensure spawn is at least 15 units away from player
+
+
+                GameObject newObj = Instantiate(objectToSpawn, spawnPosition, Quaternion.identity, parentTransform);
                 spawnedObj.Add(newObj);
                 
                 timer = 0f;

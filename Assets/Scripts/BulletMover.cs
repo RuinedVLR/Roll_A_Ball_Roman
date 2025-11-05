@@ -36,7 +36,6 @@ public class BulletMover : MonoBehaviour
             enemyComponent.Die();
         }
 
-        Debug.Log("Wall hit");
         Destroy(gameObject);
     }
 }

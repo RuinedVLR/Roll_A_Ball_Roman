@@ -7,16 +7,20 @@ public class Firing : MonoBehaviour
     public Transform parentObject;
     public float bulletSpeed = 50f;
     public float timer = 0f;
-    public float delayTime = 2f;
+    public static float delayTime = 2f;
     public float radius = 3f;
+
+    public Transform bulletTransform;
 
 
     void Update()
     {
-        delayTime = 2 - (0.2f * LVLupMenu.fireRateLvl);
-        if (delayTime <= 0f)
+        bulletTransform.localScale = new Vector3(0.6f + (0.2f * LVLupMenu.firePowerLvl), 0.6f + (0.2f * LVLupMenu.firePowerLvl), 0.6f + (0.2f * LVLupMenu.firePowerLvl));
+
+        delayTime = 2 - (0.15f * LVLupMenu.fireRateLvl);
+        if (delayTime <= 0.2f)
         {
-            delayTime = 0.1f;
+            delayTime = 0.2f;
         }
         
         timer += Time.deltaTime;

@@ -27,7 +27,10 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("resume pressed");
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        if (!LVLupMenu.isChoosingOption)
+        {
+            Time.timeScale = 1f;
+        }
         isPaused = false;
     }
 

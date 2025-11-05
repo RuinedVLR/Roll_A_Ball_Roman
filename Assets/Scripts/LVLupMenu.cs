@@ -1,24 +1,38 @@
-using UnityEngine;
+using System;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class LVLupMenu : MonoBehaviour
 {
-    public GameObject lvlUpMenuUI;
+    public GameObject lvlUpMenuUI_3opt;
+    public GameObject lvlUpMenuUI_2opt;
+    public GameObject lvlUpMenuUI_1opt;
 
     public static bool isChoosingOption = false;
 
-    public TextMeshProUGUI option1Text;
-    public TextMeshProUGUI option2Text;
-    public TextMeshProUGUI option3Text;
+    public TextMeshProUGUI option1Text_3opt;
+    public TextMeshProUGUI option2Text_3opt;
+    public TextMeshProUGUI option3Text_3opt;
+
+    public TextMeshProUGUI option1Text_2opt;
+    public TextMeshProUGUI option2Text_2opt;
+
+    public TextMeshProUGUI option1Text_1opt;
 
     private int option1Randomizer;
     private int option2Randomizer;
     private int option3Randomizer;
 
-    public Image targetImage1;
-    public Image targetImage2;
-    public Image targetImage3;
+    public Image targetImage1_3opt;
+    public Image targetImage2_3opt;
+    public Image targetImage3_3opt;
+
+    public Image targetImage1_2opt;
+    public Image targetImage2_2opt;
+
+    public Image targetImage1_1opt;
 
     private string[] optionNames = { "Magnet", "Speed Boost", "Fire Rate", "Fire Power" };
     public string[] imageNames = { "Option1IMG", "Option2IMG", "Option3IMG", "Option4IMG" };
@@ -28,6 +42,11 @@ public class LVLupMenu : MonoBehaviour
     public static int speedLvl;
     public static int fireRateLvl;
     public static int firePowerLvl;
+
+    public int maxMagnetLvl = 10;
+    public int maxSpeedLvl = 10;
+    public int maxFireRateLvl = 12;
+    public int maxFirePowerLvl = 5;
 
 
     private void Start()
@@ -53,43 +72,114 @@ public class LVLupMenu : MonoBehaviour
 
     public void LvlUpOption()
     {
-        option1Randomizer = Random.Range(0, optionNames.Length);
-        while (option2Randomizer == option1Randomizer)
+        List<int> availableOptions = new List<int>();
+
+        if (magnetLvl < maxMagnetLvl) availableOptions.Add(0);
+        if (speedLvl < maxSpeedLvl) availableOptions.Add(1);
+        if (fireRateLvl < maxFireRateLvl) availableOptions.Add(2);
+        if (firePowerLvl < maxFirePowerLvl) availableOptions.Add(3);
+
+        if (availableOptions.Count >= 3)
         {
-            option2Randomizer = Random.Range(0, optionNames.Length);
+            List<int> selectedOptions = new List<int>();
+            while (selectedOptions.Count < 3)
+            {
+                int randIndex = availableOptions[UnityEngine.Random.Range(0, availableOptions.Count)];
+                if (!selectedOptions.Contains(randIndex))
+                {
+                    selectedOptions.Add(randIndex);
+                }
+            }
+            option1Randomizer = selectedOptions[0];
+            option2Randomizer = selectedOptions[1];
+            option3Randomizer = selectedOptions[2];
+
+            targetImage1_3opt.gameObject.SetActive(true);
+            targetImage2_3opt.gameObject.SetActive(true);
+            targetImage3_3opt.gameObject.SetActive(true);
+
+            lvlUpMenuUI_3opt.SetActive(true);
+            Time.timeScale = 0f;
+            option1Text_3opt.text = optionNames[option1Randomizer];
+            option2Text_3opt.text = optionNames[option2Randomizer];
+            option3Text_3opt.text = optionNames[option3Randomizer];
+            Sprite selectedSprite1 = loadedSprites[option1Randomizer];
+            Sprite selectedSprite2 = loadedSprites[option2Randomizer];
+            Sprite selectedSprite3 = loadedSprites[option3Randomizer];
+            Debug.Log(selectedSprite1); // Should not be null
+            Debug.Log(selectedSprite2); // Should not be null
+            Debug.Log(selectedSprite3); // Should not be null
+
+            targetImage1_3opt.sprite = selectedSprite1;
+            targetImage2_3opt.sprite = selectedSprite2;
+            targetImage3_3opt.sprite = selectedSprite3;
+            isChoosingOption = true;
+            PlayerControls.isLVLup = false;
         }
-        while (option3Randomizer == option2Randomizer || option3Randomizer == option1Randomizer)
+
+        if (availableOptions.Count == 2)
         {
-            option3Randomizer = Random.Range(0, optionNames.Length);
+            List<int> selectedOptions = new List<int>();
+            while (selectedOptions.Count < 2)
+            {
+                int randIndex = availableOptions[UnityEngine.Random.Range(0, availableOptions.Count)];
+                if (!selectedOptions.Contains(randIndex))
+                {
+                    selectedOptions.Add(randIndex);
+                }
+            }
+            option1Randomizer = selectedOptions[0];
+            option2Randomizer = selectedOptions[1];
+
+            targetImage1_2opt.gameObject.SetActive(true);
+            targetImage2_2opt.gameObject.SetActive(true);
+
+            lvlUpMenuUI_2opt.SetActive(true);
+            Time.timeScale = 0f;
+            option1Text_2opt.text = optionNames[option1Randomizer];
+            option2Text_2opt.text = optionNames[option2Randomizer];
+            Sprite selectedSprite1 = loadedSprites[option1Randomizer];
+            Sprite selectedSprite2 = loadedSprites[option2Randomizer];
+            Debug.Log(selectedSprite1); // Should not be null
+            Debug.Log(selectedSprite2); // Should not be null
+
+            targetImage1_2opt.sprite = selectedSprite1;
+            targetImage2_2opt.sprite = selectedSprite2;
+            isChoosingOption = true;
+            PlayerControls.isLVLup = false;
         }
-        
-        targetImage1.gameObject.SetActive(true);
-        targetImage2.gameObject.SetActive(true);
-        targetImage3.gameObject.SetActive(true);
 
+        if (availableOptions.Count == 1)
+        {
+            List<int> selectedOptions = new List<int>();
+            while (selectedOptions.Count < 1)
+            {
+                int randIndex = availableOptions[UnityEngine.Random.Range(0, availableOptions.Count)];
+                if (!selectedOptions.Contains(randIndex))
+                {
+                    selectedOptions.Add(randIndex);
+                }
+            }
+            option1Randomizer = selectedOptions[0];
 
-        lvlUpMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        option1Text.text = optionNames[option1Randomizer].ToString();
-        option2Text.text = optionNames[option2Randomizer].ToString();
-        option3Text.text = optionNames[option3Randomizer].ToString();
-        Sprite selectedSprite1 = loadedSprites[option1Randomizer];
-        Sprite selectedSprite2 = loadedSprites[option2Randomizer];
-        Sprite selectedSprite3 = loadedSprites[option3Randomizer];
-        Debug.Log(selectedSprite1); // Should not be null
-        Debug.Log(selectedSprite2); // Should not be null
-        Debug.Log(selectedSprite3); // Should not be null
+            targetImage1_1opt.gameObject.SetActive(true);
 
-        targetImage1.sprite = selectedSprite1;
-        targetImage2.sprite = selectedSprite2;
-        targetImage3.sprite = selectedSprite3;
-        isChoosingOption = true;
-        PlayerControls.isLVLup = false;
+            lvlUpMenuUI_1opt.SetActive(true);
+            Time.timeScale = 0f;
+            option1Text_1opt.text = optionNames[option1Randomizer];
+            Sprite selectedSprite1 = loadedSprites[option1Randomizer];
+            Debug.Log(selectedSprite1); // Should not be null
+            targetImage1_1opt.sprite = selectedSprite1;
+            isChoosingOption = true;
+            PlayerControls.isLVLup = false;
+        }
     }
-    
+
     public void Option1()
     {
-        lvlUpMenuUI.SetActive(false);
+        lvlUpMenuUI_3opt.SetActive(false);
+        lvlUpMenuUI_2opt.SetActive(false);
+        lvlUpMenuUI_1opt.SetActive(false);
         Time.timeScale = 1f;
         isChoosingOption = false;
 
@@ -113,7 +203,9 @@ public class LVLupMenu : MonoBehaviour
 
     public void Option2()
     {
-        lvlUpMenuUI.SetActive(false);
+        lvlUpMenuUI_3opt.SetActive(false);
+        lvlUpMenuUI_2opt.SetActive(false);
+        lvlUpMenuUI_1opt.SetActive(false);
         Time.timeScale = 1f;
         isChoosingOption = false;
 
@@ -137,7 +229,9 @@ public class LVLupMenu : MonoBehaviour
 
     public void Option3()
     {
-        lvlUpMenuUI.SetActive(false);
+        lvlUpMenuUI_3opt.SetActive(false);
+        lvlUpMenuUI_2opt.SetActive(false);
+        lvlUpMenuUI_1opt.SetActive(false);
         Time.timeScale = 1f;
         isChoosingOption = false;
 

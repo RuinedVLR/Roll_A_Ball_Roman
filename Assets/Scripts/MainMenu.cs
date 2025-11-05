@@ -3,26 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    private void Update()
+    public void Restart()
     {
-        if (Input.GetKeyDown(KeyCode.R) && PlayerControls.isDead == true)
-        {
-            Debug.Log("R key pressed");
-            SceneManager.LoadScene(1);
-            LVLupMenu.magnetLvl = 1;
-            LVLupMenu.speedLvl = 1;
-            LVLupMenu.fireRateLvl = 1;
-            LVLupMenu.firePowerLvl = 1;
-        }
+        SceneManager.LoadScene(1);
+        LVLupMenu.magnetLvl = 0;
+        LVLupMenu.speedLvl = 0;
+        LVLupMenu.fireRateLvl = 0;
+        LVLupMenu.firePowerLvl = 0;
     }
 
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        LVLupMenu.magnetLvl = 1;
-        LVLupMenu.speedLvl = 1;
-        LVLupMenu.fireRateLvl = 1;
-        LVLupMenu.firePowerLvl = 1;
+        LVLupMenu.magnetLvl = 0;
+        LVLupMenu.speedLvl = 0;
+        LVLupMenu.fireRateLvl = 0;
+        LVLupMenu.firePowerLvl = 0;
     }
 
     public void QuitGame()
