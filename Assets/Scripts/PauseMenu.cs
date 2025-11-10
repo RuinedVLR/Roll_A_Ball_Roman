@@ -1,24 +1,28 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool isPaused = false;
-
+    [Header("Pause UI")]
+    [SerializeField] public static bool isPaused = false;
     public GameObject pauseMenuUI;
+
+    [Header("First Selected")]
+    [SerializeField] private GameObject resumeFirst;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (InputManager.instance.MenuOpenCloseInput)
         {
-            if (isPaused)
+            if (!isPaused)
             {
-                Resume();
+                Pause();
             }
             else
             {
-                Pause();
+                Resume();
             }
         }
     }
@@ -32,6 +36,8 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 1f;
         }
         isPaused = false;
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     void Pause()
@@ -39,6 +45,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+
+        EventSystem.current.SetSelectedGameObject(resumeFirst);
     }
 
     public void LoadMenu()
