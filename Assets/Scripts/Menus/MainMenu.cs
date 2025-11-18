@@ -16,11 +16,16 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Level");
         LVLupMenu.magnetLvl = 0;
         LVLupMenu.speedLvl = 0;
         LVLupMenu.fireRateLvl = 0;
         LVLupMenu.firePowerLvl = 0;
+    }
+
+    public void CharacterSelect()
+    {
+        SceneManager.LoadScene("CharacterSelect");
     }
 
     public void LoadShop()

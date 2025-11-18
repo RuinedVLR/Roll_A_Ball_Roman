@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -51,7 +52,7 @@ public class SaveManager : MonoBehaviour
     }
 }
 
-[SerializeField]
+[Serializable]
 class PlayerData_Storage
 {
     public int currentChar;

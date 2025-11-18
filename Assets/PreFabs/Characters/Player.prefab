@@ -21,8 +21,8 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_StaticEditorFlags: 1
+  m_IsActive: 0
 --- !u!4 &2834158981296045105
 Transform:
   m_ObjectHideFlags: 0
@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5011377142006143651}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -522.4985, y: -321.06, z: -3.3429415}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
@@ -100,7 +100,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5011377142006143651}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5351d17a43908ff479d4e152304dcbbc, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -123,7 +123,7 @@ Rigidbody:
   m_GameObject: {fileID: 5011377142006143651}
   serializedVersion: 4
   m_Mass: 0.4
-  m_Drag: 0
+  m_Drag: 0.6
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -183,9 +183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41da994add086a04e9226b40d8cb6093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   countText: {fileID: 0}
   loseTextObject: {fileID: 0}
+  hasDied: 0
+  survivedTimeText: {fileID: 0}
+  timeText: {fileID: 0}
   xpText: {fileID: 0}
   lvlText: {fileID: 0}
 --- !u!114 &730846010607641888
@@ -204,8 +206,8 @@ MonoBehaviour:
   parentObject: {fileID: 2834158981296045105}
   bulletSpeed: 50
   timer: 0
-  delayTime: 1
   radius: 5
+  bulletTransform: {fileID: 8725687297980189496, guid: 1973e0933b9e36149980c3cbcabed9e8, type: 3}
 --- !u!1 &6506497121002208536
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,12 +218,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3754043588548577223}
   - component: {fileID: 129532707297838227}
+  - component: {fileID: 3273001601317476341}
   m_Layer: 0
   m_Name: MagnetCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &3754043588548577223
 Transform:
@@ -257,8 +260,21 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3273001601317476341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6506497121002208536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13de6b256e5794a43b99b9296e156f27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereCollider: {fileID: 129532707297838227}
 --- !u!1 &7060266498877330046
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,12 +285,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3281598957317861667}
   - component: {fileID: 5452945797680858406}
+  - component: {fileID: 5975690612148270959}
   m_Layer: 0
   m_Name: CollectibleCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &3281598957317861667
 Transform:
@@ -306,9 +323,21 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5975690612148270959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7060266498877330046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705c8b7a79b7ca74da92a39fafeee062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
