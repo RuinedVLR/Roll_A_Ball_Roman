@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
     public Transform enemyPosition;
     public Transform enemyParent;
     public GameObject enemy;
@@ -12,6 +12,8 @@ public class EnemyScript : MonoBehaviour
     
     void Start()
     {
+        player = SpawnChosenChar.player.transform;
+
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 

@@ -7,7 +7,9 @@ public class SpawnRandomizer : MonoBehaviour
     public int countExists;     //how many enemies exist
     public GameObject objectToSpawn;    //enemy prefab
     public Transform parentTransform;   //parent object
-    public Transform playerTransform;   //player object
+
+    [SerializeField] private GameObject[] chars;
+    private Transform playerTransform;   //player object
 
     private Vector3 spawnRangeMin = new Vector3(-145f, 0.5f, -70f);
     private Vector3 spawnRangeMax = new Vector3(145f, 0.5f, 70f);
@@ -17,9 +19,14 @@ public class SpawnRandomizer : MonoBehaviour
 
     private float timer = 0f;
     private int maxObjects = 200;
-    public List<GameObject> spawnedObj = new List<GameObject>();   
-    
+    public List<GameObject> spawnedObj = new List<GameObject>();
 
+
+
+    private void Awake()
+    {
+        playerTransform = chars[SaveManager.instance.currentChar].transform;
+    }
 
     // Update is called once per frame
     void Update()

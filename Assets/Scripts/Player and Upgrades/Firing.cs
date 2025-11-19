@@ -8,7 +8,7 @@ public class Firing : MonoBehaviour
     public float bulletSpeed = 50f;
     public float timer = 0f;
     public static float delayTime = 2f;
-    public float radius = 3f;
+    public float radius;
 
     public Transform bulletTransform;
 
