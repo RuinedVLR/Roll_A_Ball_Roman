@@ -9,10 +9,11 @@ public class SaveManager : MonoBehaviour
     public static SaveManager instance { get; private set; }
 
     public int currentChar;
+    public float volume = 0f;
 
     private void Awake()
     {
-        if(instance != null && instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
         }
@@ -34,6 +35,7 @@ public class SaveManager : MonoBehaviour
             PlayerData_Storage data = (PlayerData_Storage)bf.Deserialize(file);
 
             currentChar = data.currentChar;
+            volume = data.volume;
 
             file.Close();
         }
@@ -46,6 +48,7 @@ public class SaveManager : MonoBehaviour
         PlayerData_Storage data = new PlayerData_Storage();
 
         data.currentChar = currentChar;
+        data.volume = volume;
 
         bf.Serialize(file, data);
         file.Close();
@@ -56,4 +59,5 @@ public class SaveManager : MonoBehaviour
 class PlayerData_Storage
 {
     public int currentChar;
+    public float volume;
 }

@@ -5,23 +5,34 @@ using TMPro;
 public class PlayerControls : MonoBehaviour
 {
     private Rigidbody rb;
+
     private float movementX;
     private float movementY;
+
     public static float speed = 50;
+
     public TextMeshProUGUI countText;
+
     public GameObject loseTextObject;
     public static bool isDead;
     public bool hasDied = false;
     public TextMeshProUGUI survivedTimeText;
+
     public TextMeshProUGUI timeText;
     private float timer;
+
     private string finalSurvivedTime;
+
     public TextMeshProUGUI xpText;
     public TextMeshProUGUI lvlText;
     private int lvl;
     private int xp;
     private int xpNeeded;
     public static bool isLVLup = false;
+
+    public AudioClip pickupClip;
+    public AudioSource randomPitch;
+    
 
 
 
@@ -66,6 +77,8 @@ public class PlayerControls : MonoBehaviour
 
         if (Collector.isCollected)
         {
+            randomPitch.pitch = Random.Range(0.8f, 1.2f);
+            randomPitch.PlayOneShot(pickupClip, 0.1f);
             xp += 25;
             Collector.isCollected = false;
         }

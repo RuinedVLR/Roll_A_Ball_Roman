@@ -36,6 +36,9 @@ public class BulletMover : MonoBehaviour
             enemyComponent.Die();
         }
 
-        Destroy(gameObject);
+        if(!collision.gameObject.CompareTag("Floor"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -48,6 +48,9 @@ public class LVLupMenu : MonoBehaviour
     public int maxFireRateLvl = 12;
     public int maxFirePowerLvl = 5;
 
+    public AudioClip lvlUpClip;
+    public AudioSource fixedPitch;
+
 
     private void Start()
     {
@@ -199,6 +202,8 @@ public class LVLupMenu : MonoBehaviour
         {
             firePowerLvl++;
         }
+
+        fixedPitch.PlayOneShot(lvlUpClip, 0.7f);
     }
 
     public void Option2()
@@ -225,6 +230,8 @@ public class LVLupMenu : MonoBehaviour
         {
             firePowerLvl++;
         }
+
+        fixedPitch.PlayOneShot(lvlUpClip, 0.7f);
     }
 
     public void Option3()
@@ -251,5 +258,7 @@ public class LVLupMenu : MonoBehaviour
         {
             firePowerLvl++;
         }
+
+        fixedPitch.PlayOneShot(lvlUpClip, 0.7f);
     }
 }

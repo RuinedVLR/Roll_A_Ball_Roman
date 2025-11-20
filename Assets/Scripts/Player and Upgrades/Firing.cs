@@ -12,15 +12,17 @@ public class Firing : MonoBehaviour
 
     public Transform bulletTransform;
 
+    public AudioClip shootingClip;
+    public AudioSource shootingSource;
 
     void Update()
     {
-        bulletTransform.localScale = new Vector3(0.6f + (0.2f * LVLupMenu.firePowerLvl), 0.6f + (0.2f * LVLupMenu.firePowerLvl), 0.6f + (0.2f * LVLupMenu.firePowerLvl));
+        bulletTransform.localScale = new Vector3(0.6f + (0.2f * LVLupMenu.firePowerLvl), 0.6f, 0.6f + (0.2f * LVLupMenu.firePowerLvl));
 
         delayTime = 2 - (0.15f * LVLupMenu.fireRateLvl);
-        if (delayTime <= 0.2f)
+        if (delayTime <= 0.4f)
         {
-            delayTime = 0.2f;
+            delayTime = 0.4f;
         }
         
         timer += Time.deltaTime;
@@ -56,6 +58,9 @@ public class Firing : MonoBehaviour
                     mover.Initialize(direction, bulletSpeed, 5f);
                 }
             }
+
+            shootingSource.pitch = Random.Range(0.9f, 1.1f);
+            shootingSource.PlayOneShot(shootingClip);
 
             timer = 0f;
         }

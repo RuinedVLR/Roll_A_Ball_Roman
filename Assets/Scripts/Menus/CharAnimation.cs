@@ -12,7 +12,7 @@ public class CharAnimation : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, finalPosition, 0.1f);
+        transform.position = Vector3.Lerp(transform.position, finalPosition, 0.3f);
     }
 
     private void OnDisable()
