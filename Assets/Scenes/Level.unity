@@ -1039,7 +1039,7 @@ PrefabInstance:
     - target: {fileID: 730846010607641888, guid: 585fe522ca5868f40acc7840e17ac962, type: 3}
       propertyPath: shootingSource
       value: 
-      objectReference: {fileID: 721243263}
+      objectReference: {fileID: 1437753036}
     - target: {fileID: 730846010607641888, guid: 585fe522ca5868f40acc7840e17ac962, type: 3}
       propertyPath: bulletTransform
       value: 
@@ -1135,7 +1135,7 @@ PrefabInstance:
     - target: {fileID: 5922494322530073115, guid: 585fe522ca5868f40acc7840e17ac962, type: 3}
       propertyPath: randomPitch
       value: 
-      objectReference: {fileID: 721243263}
+      objectReference: {fileID: 1437753036}
     - target: {fileID: 5922494322530073115, guid: 585fe522ca5868f40acc7840e17ac962, type: 3}
       propertyPath: loseTextObject
       value: 
@@ -5783,7 +5783,7 @@ PrefabInstance:
     - target: {fileID: 730846010607641888, guid: 9c50acb7be1f9dc419fd3ffa65658480, type: 3}
       propertyPath: shootingSource
       value: 
-      objectReference: {fileID: 721243263}
+      objectReference: {fileID: 961132167}
     - target: {fileID: 730846010607641888, guid: 9c50acb7be1f9dc419fd3ffa65658480, type: 3}
       propertyPath: bulletTransform
       value: 
@@ -5887,7 +5887,7 @@ PrefabInstance:
     - target: {fileID: 5922494322530073115, guid: 9c50acb7be1f9dc419fd3ffa65658480, type: 3}
       propertyPath: randomPitch
       value: 
-      objectReference: {fileID: 721243263}
+      objectReference: {fileID: 961132167}
     - target: {fileID: 5922494322530073115, guid: 9c50acb7be1f9dc419fd3ffa65658480, type: 3}
       propertyPath: loseTextObject
       value: 

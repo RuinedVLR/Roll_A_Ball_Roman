@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SaveManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class SaveManager : MonoBehaviour
 
     public int currentChar;
     public float volume = 0f;
+    public AudioMixer audioMixer;
 
     private void Awake()
     {
@@ -24,6 +26,7 @@ public class SaveManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         Load();
+        ApplyVolume();
     }
 
     public void Load()
@@ -52,6 +55,14 @@ public class SaveManager : MonoBehaviour
 
         bf.Serialize(file, data);
         file.Close();
+    }
+
+    private void ApplyVolume()
+    {
+        if (audioMixer != null)
+        {
+            audioMixer.SetFloat("volume", volume);
+        }
     }
 }
 

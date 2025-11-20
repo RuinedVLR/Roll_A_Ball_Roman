@@ -1420,6 +1420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentChar: 0
   volume: 0
+  audioMixer: {fileID: 24100000, guid: ab8ba3946d13c8d458f42f68a1870991, type: 2}
 --- !u!4 &616489035
 Transform:
   m_ObjectHideFlags: 0

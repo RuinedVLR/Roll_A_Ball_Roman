@@ -12,7 +12,6 @@ public class SettingsMenu : MonoBehaviour
         if (SaveManager.instance != null && volumeSlider != null)
         {
             volumeSlider.value = SaveManager.instance.volume;
-            audioMixer.SetFloat("volume", SaveManager.instance.volume);
         }
     }
 
