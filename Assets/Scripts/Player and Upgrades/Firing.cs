@@ -10,6 +10,8 @@ public class Firing : MonoBehaviour
     public static float delayTime = 2f;
     public float radius;
 
+    public static float scale;
+
     public Transform bulletTransform;
 
     public AudioClip shootingClip;
@@ -18,6 +20,7 @@ public class Firing : MonoBehaviour
     void Update()
     {
         bulletTransform.localScale = new Vector3(0.6f + (0.2f * LVLupMenu.firePowerLvl), 0.6f, 0.6f + (0.2f * LVLupMenu.firePowerLvl));
+        scale = 0.6f + (0.2f * LVLupMenu.firePowerLvl);
 
         delayTime = 2 - (0.15f * LVLupMenu.fireRateLvl);
         if (delayTime <= 0.4f)

@@ -9,7 +9,7 @@ public class PlayerControls : MonoBehaviour
     private float movementX;
     private float movementY;
 
-    public static float speed = 50;
+    public static float speed = 7;
 
     public TextMeshProUGUI countText;
 

@@ -12,6 +12,7 @@ public class LVLupMenu : MonoBehaviour
 
     public static bool isChoosingOption = false;
 
+
     public TextMeshProUGUI option1Text_3opt;
     public TextMeshProUGUI option2Text_3opt;
     public TextMeshProUGUI option3Text_3opt;
@@ -20,6 +21,17 @@ public class LVLupMenu : MonoBehaviour
     public TextMeshProUGUI option2Text_2opt;
 
     public TextMeshProUGUI option1Text_1opt;
+
+
+    public TextMeshProUGUI upgrade1Text_3opt;
+    public TextMeshProUGUI upgrade2Text_3opt;
+    public TextMeshProUGUI upgrade3Text_3opt;
+
+    public TextMeshProUGUI upgrade1Text_2opt;
+    public TextMeshProUGUI upgrade2Text_2opt;
+
+    public TextMeshProUGUI upgrade1Text_1opt;
+
 
     private int option1Randomizer;
     private int option2Randomizer;
@@ -35,6 +47,7 @@ public class LVLupMenu : MonoBehaviour
     public Image targetImage1_1opt;
 
     private string[] optionNames = { "Magnet", "Speed Boost", "Fire Rate", "Fire Power" };
+    private string[] upgradeMath = { $"Radius {Magnet.radius + magnetLvl} + 1", $"{PlayerControls.speed + speedLvl} + 1", $"{Firing.delayTime - (0.15 * fireRateLvl)}s - 0.15s", $"Radius {Firing.scale + (0.6 * firePowerLvl)} + 0.6" };
     public string[] imageNames = { "Option1IMG", "Option2IMG", "Option3IMG", "Option4IMG" };
     private Sprite[] loadedSprites;
 
@@ -45,7 +58,7 @@ public class LVLupMenu : MonoBehaviour
 
     public int maxMagnetLvl = 10;
     public int maxSpeedLvl = 10;
-    public int maxFireRateLvl = 12;
+    public int maxFireRateLvl = 10;
     public int maxFirePowerLvl = 5;
 
     public AudioClip lvlUpClip;
@@ -106,6 +119,9 @@ public class LVLupMenu : MonoBehaviour
             option1Text_3opt.text = optionNames[option1Randomizer];
             option2Text_3opt.text = optionNames[option2Randomizer];
             option3Text_3opt.text = optionNames[option3Randomizer];
+            upgrade1Text_3opt.text = upgradeMath[option1Randomizer];
+            upgrade2Text_3opt.text = upgradeMath[option2Randomizer];
+            upgrade3Text_3opt.text = upgradeMath[option3Randomizer];
             Sprite selectedSprite1 = loadedSprites[option1Randomizer];
             Sprite selectedSprite2 = loadedSprites[option2Randomizer];
             Sprite selectedSprite3 = loadedSprites[option3Randomizer];
@@ -141,6 +157,8 @@ public class LVLupMenu : MonoBehaviour
             Time.timeScale = 0f;
             option1Text_2opt.text = optionNames[option1Randomizer];
             option2Text_2opt.text = optionNames[option2Randomizer];
+            upgrade1Text_2opt.text = upgradeMath[option1Randomizer];
+            upgrade2Text_2opt.text = upgradeMath[option2Randomizer];
             Sprite selectedSprite1 = loadedSprites[option1Randomizer];
             Sprite selectedSprite2 = loadedSprites[option2Randomizer];
             Debug.Log(selectedSprite1); // Should not be null
@@ -170,6 +188,7 @@ public class LVLupMenu : MonoBehaviour
             lvlUpMenuUI_1opt.SetActive(true);
             Time.timeScale = 0f;
             option1Text_1opt.text = optionNames[option1Randomizer];
+            upgrade1Text_1opt.text = upgradeMath[option1Randomizer];
             Sprite selectedSprite1 = loadedSprites[option1Randomizer];
             Debug.Log(selectedSprite1); // Should not be null
             targetImage1_1opt.sprite = selectedSprite1;

@@ -10,6 +10,8 @@ public class SaveManager : MonoBehaviour
     public static SaveManager instance { get; private set; }
 
     public int currentChar;
+    public bool[] charsUnlocked = new bool[4] { true, false, false, false};
+    public int money;
     public float volume = 0f;
     public AudioMixer audioMixer;
 
@@ -38,7 +40,14 @@ public class SaveManager : MonoBehaviour
             PlayerData_Storage data = (PlayerData_Storage)bf.Deserialize(file);
 
             currentChar = data.currentChar;
+            charsUnlocked = data.charsUnlocked;
+            money = data.money;
             volume = data.volume;
+
+            if (data.charsUnlocked == null)
+            {
+                charsUnlocked = new bool[4] { true, false, false, false};
+            }
 
             file.Close();
         }
@@ -51,6 +60,8 @@ public class SaveManager : MonoBehaviour
         PlayerData_Storage data = new PlayerData_Storage();
 
         data.currentChar = currentChar;
+        data.charsUnlocked = charsUnlocked;
+        data.money = money;
         data.volume = volume;
 
         bf.Serialize(file, data);
@@ -70,5 +81,7 @@ public class SaveManager : MonoBehaviour
 class PlayerData_Storage
 {
     public int currentChar;
+    public bool[] charsUnlocked;
+    public int money;
     public float volume;
 }

@@ -9,7 +9,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject enemy;
     public GameObject pickUpToSpawn;
     private NavMeshAgent navMeshAgent;
-    
+
     void Start()
     {
         player = SpawnChosenChar.player.transform;
@@ -31,5 +31,13 @@ public class EnemyScript : MonoBehaviour
         Vector3 spawnPosition = new Vector3(enemyPosition.transform.position.x, enemyPosition.transform.position.y, enemyPosition.transform.position.z);
         Destroy(gameObject);
         GameObject newObj = Instantiate(pickUpToSpawn, spawnPosition, Quaternion.identity, enemyParent);
+
+        int rand = Random.Range(0, 50);
+
+        if (rand < 1)
+        {
+            SaveManager.instance.money += 100;
+            SaveManager.instance.Save();
+        }
     }
 }
