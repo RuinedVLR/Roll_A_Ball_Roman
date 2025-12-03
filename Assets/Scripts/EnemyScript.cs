@@ -10,6 +10,9 @@ public class EnemyScript : MonoBehaviour
     public GameObject pickUpToSpawn;
     private NavMeshAgent navMeshAgent;
 
+    public AudioSource moneySound;
+    public AudioClip moneySoundClip;
+
     void Start()
     {
         player = SpawnChosenChar.player.transform;
@@ -36,6 +39,7 @@ public class EnemyScript : MonoBehaviour
 
         if (rand < 1)
         {
+            moneySound.PlayOneShot(moneySoundClip);
             SaveManager.instance.money += 100;
             SaveManager.instance.Save();
         }

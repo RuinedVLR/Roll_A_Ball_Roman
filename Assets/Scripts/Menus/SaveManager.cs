@@ -14,6 +14,7 @@ public class SaveManager : MonoBehaviour
     public int money;
     public float volume = 0f;
     public AudioMixer audioMixer;
+    public bool isFullscreen = true;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class SaveManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Load();
         ApplyVolume();
+        ApplyFullscreen();
     }
 
     public void Load()
@@ -43,6 +45,7 @@ public class SaveManager : MonoBehaviour
             charsUnlocked = data.charsUnlocked;
             money = data.money;
             volume = data.volume;
+            isFullscreen = data.isFullscreen;
 
             if (data.charsUnlocked == null)
             {
@@ -63,6 +66,7 @@ public class SaveManager : MonoBehaviour
         data.charsUnlocked = charsUnlocked;
         data.money = money;
         data.volume = volume;
+        data.isFullscreen = isFullscreen;
 
         bf.Serialize(file, data);
         file.Close();
@@ -75,6 +79,19 @@ public class SaveManager : MonoBehaviour
             audioMixer.SetFloat("volume", volume);
         }
     }
+
+    private void ApplyFullscreen()
+    {
+        Screen.fullScreen = isFullscreen;
+    }
+
+    public void ResetProgress()
+    {
+        currentChar = 0;
+        charsUnlocked = new bool[4] { true, false, false, false};
+        money = 0;
+        Save();
+    }
 }
 
 [Serializable]
@@ -84,4 +101,5 @@ class PlayerData_Storage
     public bool[] charsUnlocked;
     public int money;
     public float volume;
+    public bool isFullscreen;
 }

@@ -13,6 +13,9 @@ public class PlayerControls : MonoBehaviour
 
     public TextMeshProUGUI countText;
 
+    public int playerHealth;
+    public TextMeshProUGUI playerHealthText;
+
     public GameObject loseTextObject;
     public static bool isDead;
     public bool hasDied = false;
@@ -32,9 +35,10 @@ public class PlayerControls : MonoBehaviour
 
     public AudioClip pickupClip;
     public AudioSource randomPitch;
-    
 
-
+    public AudioSource hitSound;
+    public AudioClip hitClip;
+    public AudioClip deathSound;
 
     void Start()
     {
@@ -92,8 +96,24 @@ public class PlayerControls : MonoBehaviour
         }
         xpText.text = "XP: " + xp.ToString() + "/" + xpNeeded.ToString();
         lvlText.text = "LVL: " + lvl.ToString();
+        playerHealthText.text = "Health: " + playerHealth.ToString();
 
         speed = 7 + LVLupMenu.speedLvl;
+
+
+        if (playerHealth <= 0)
+        {
+            isDead = true;
+            survivedTimeText.text = "You survived for: " + finalSurvivedTime;
+            hitSound.PlayOneShot(deathSound);
+
+            gameObject.SetActive(false);
+            timeText.gameObject.SetActive(false);
+            xpText.gameObject.SetActive(false);
+            lvlText.gameObject.SetActive(false);
+            playerHealthText.gameObject.SetActive(false);
+            loseTextObject.SetActive(true);
+        }
     }
 
     private void FixedUpdate()
@@ -104,18 +124,23 @@ public class PlayerControls : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            isDead = true;
+            EnemyScript enemy = collision.gameObject.GetComponent<EnemyScript>();
+            if (enemy != null)
+            {
+                enemy.Die();
+            }
+            else
+            {
+                Debug.LogWarning("EnemyScript not found on collided object", collision.gameObject);
+            }
 
-            survivedTimeText.text = "You survived for: " + finalSurvivedTime;
-
-            gameObject.SetActive(false);
-            timeText.gameObject.SetActive(false);
-            xpText.gameObject.SetActive(false);
-            lvlText.gameObject.SetActive(false);
-            loseTextObject.SetActive(true);
+            if(playerHealth > 0)
+            {
+                hitSound.PlayOneShot(hitClip);
+                playerHealth -= 1;
+            }
         }
     }
-
 }

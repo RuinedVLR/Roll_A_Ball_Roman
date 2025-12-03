@@ -89,4 +89,9 @@ public class CharSelection : MonoBehaviour
         SaveManager.instance.Save();
         UpdateUI();
     }
+
+    public void LoadMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
 }
