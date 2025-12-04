@@ -28,11 +28,6 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("CharacterSelect");
     }
 
-    public void LoadShop()
-    {
-        SceneManager.LoadScene("Shop");
-    }
-
     public void QuitGame()
     {
         Application.Quit();
